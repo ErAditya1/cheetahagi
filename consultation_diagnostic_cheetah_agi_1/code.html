@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CHEETAH AGI - CONSULTATION DIAGNOSTIC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#683c00",
+                        "secondary-container": "#00f4fe",
+                        "surface-tint": "#ffb86b",
+                        "on-secondary-container": "#006c71",
+                        "primary-container": "#ff9f1c",
+                        "tertiary-fixed": "#f8d8ff",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#a28d7a",
+                        "background": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "inverse-surface": "#e5e2e1",
+                        "primary": "#ffc68b",
+                        "secondary-fixed": "#63f7ff",
+                        "surface-bright": "#3a3939",
+                        "on-secondary": "#003739",
+                        "on-primary-fixed-variant": "#683d00",
+                        "on-tertiary-container": "#74009f",
+                        "surface-variant": "#353534",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed": "#002021",
+                        "tertiary-container": "#e299ff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#544434",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdcbc",
+                        "on-background": "#e5e2e1",
+                        "tertiary": "#f0c0ff",
+                        "on-tertiary-fixed-variant": "#74009f",
+                        "on-primary": "#492900",
+                        "on-tertiary-fixed": "#320047",
+                        "on-tertiary": "#520072",
+                        "on-secondary-fixed-variant": "#004f53",
+                        "on-surface-variant": "#dac2ae",
+                        "inverse-primary": "#895100",
+                        "tertiary-fixed-dim": "#ebb2ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "surface": "#131313",
+                        "surface-container-highest": "#353534",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed": "#2c1700",
+                        "secondary-fixed-dim": "#00dce5",
+                        "primary-fixed-dim": "#ffb86b",
+                        "secondary": "#e6feff",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "xl": "64px",
+                        "gutter": "24px",
+                        "margin": "40px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Space Grotesk"],
+                        "body-lg": ["Space Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "h2": ["Space Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Space Grotesk"],
+                        "h3": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "h1": ["4rem", { "lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "h2": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700" }],
+                        "code-sm": ["0.875rem", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["1rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["1.5rem", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        .glass-panel {
+            background-color: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 244, 254, 0.2);
+            box-shadow: inset 0 0 20px rgba(0, 244, 254, 0.05);
+        }
+
+        .neon-border-hover:hover {
+            border-color: theme('colors.secondary-container');
+            box-shadow: inset 0 0 10px rgba(0, 244, 254, 0.2), 0 0 10px rgba(0, 244, 254, 0.2);
+        }
+
+        .amber-button {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+            border-radius: 0;
+            transition: all 0.1s ease-out;
+        }
+        .amber-button:hover {
+            background-color: theme('colors.surface-tint');
+            box-shadow: 0 0 15px theme('colors.primary-container');
+        }
+
+        .cyber-input {
+            background-color: rgba(0,0,0,0.5);
+            border: none;
+            border-bottom: 2px solid theme('colors.surface-variant');
+            color: theme('colors.on-surface');
+            font-family: 'JetBrains Mono', monospace;
+            border-radius: 0;
+        }
+        .cyber-input:focus {
+            outline: none;
+            border-bottom-color: theme('colors.secondary-container');
+            box-shadow: 0 2px 5px -1px theme('colors.secondary-container');
+            background-color: rgba(0, 244, 254, 0.05);
+        }
+
+        /* Subdued scanline effect for headers */
+        .scanline-overlay {
+            position: relative;
+        }
+        .scanline-overlay::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md antialiased overflow-x-hidden selection:bg-secondary-container selection:text-background">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-[#0D0D0D]/80 backdrop-blur-[20px] docked full-width top-0 border-b-[1px] rounded-none shadow-none border-b border-amber-500/20 border-white/10 ring-1 ring-inset ring-white/5">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-amber-500 text-2xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase font-bold text-amber-500 text-h3 font-h3 ml-sm">CHEETAH AGI</span>
+</div>
+<div class="flex items-center">
+<!-- Suppressed global nav as this is a linear/transactional flow -->
+</div>
+<div class="flex items-center">
+<button class="amber-button px-md py-sm font-label-caps text-label-caps uppercase flex items-center gap-xs">
+<span>INITIATE UPLINK</span>
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-[120px] pb-xl px-gutter max-w-7xl mx-auto w-full flex flex-col items-center">
+<!-- Header / Scanner Context -->
+<div class="w-full max-w-3xl mb-lg text-center">
+<div class="inline-flex items-center gap-sm mb-sm text-secondary-container font-code-sm text-code-sm">
+<span class="w-2 h-2 bg-secondary-container animate-pulse"></span>
+<span>DIAGNOSTIC PROTOCOL ENGAGED</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface mb-md uppercase">System Assessment</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Please provide operational parameters to calibrate neural uplink sequence. Precision is required for optimal deployment.</p>
+</div>
+<!-- Diagnostic Form Container -->
+<div class="glass-panel w-full max-w-3xl p-lg rounded-DEFAULT relative overflow-hidden">
+<!-- Structural Grid Overlay -->
+<div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: linear-gradient(theme('colors.secondary-container') 1px, transparent 1px), linear-gradient(90deg, theme('colors.secondary-container') 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Real-time Progress Bar: Uplink Signal Strength -->
+<div class="mb-lg relative z-10 border-b border-surface-variant pb-md">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant">UPLINK SIGNAL STRENGTH</span>
+<span class="font-code-sm text-code-sm text-secondary-container">25%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary-container w-1/4 shadow-[0_0_10px_theme('colors.secondary-container')]"></div>
+</div>
+<div class="flex justify-between mt-xs font-code-sm text-[10px] text-surface-variant">
+<span>SEC_01</span>
+<span>SEC_02</span>
+<span>SEC_03</span>
+<span>SEC_04</span>
+</div>
+</div>
+<!-- Form Content -->
+<div class="relative z-10">
+<!-- Step 1 Indicator -->
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-6 h-6 bg-secondary-container/20 border border-secondary-container flex items-center justify-center text-secondary-container font-code-sm text-xs">01</div>
+<h2 class="font-h3 text-h3 text-on-surface uppercase tracking-tight">Entity Classification</h2>
+</div>
+<!-- Input Groups -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+<!-- Business Size -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">OPERATIONAL SCALE</label>
+<div class="grid grid-cols-1 gap-xs">
+<button class="bg-surface-container text-on-surface border border-surface-variant py-sm px-md text-left font-body-md hover:border-secondary-container transition-colors focus:outline-none focus:border-secondary-container flex justify-between items-center group">
+<span>Micro (1-10)</span>
+<span class="material-symbols-outlined text-surface-variant group-hover:text-secondary-container text-[18px]">radio_button_unchecked</span>
+</button>
+<button class="bg-secondary-container/10 text-on-surface border border-secondary-container py-sm px-md text-left font-body-md focus:outline-none flex justify-between items-center">
+<span>Mid-Market (11-250)</span>
+<span class="material-symbols-outlined text-secondary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+</button>
+<button class="bg-surface-container text-on-surface border border-surface-variant py-sm px-md text-left font-body-md hover:border-secondary-container transition-colors focus:outline-none focus:border-secondary-container flex justify-between items-center group">
+<span>Enterprise (250+)</span>
+<span class="material-symbols-outlined text-surface-variant group-hover:text-secondary-container text-[18px]">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<!-- Industry Matrix -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">SECTOR DESIGNATION</label>
+<div class="grid grid-cols-2 gap-sm">
+<button class="flex flex-col items-center justify-center gap-sm bg-surface-container border border-surface-variant p-md hover:border-secondary-container transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-container text-[24px]">account_balance</span>
+<span class="font-code-sm text-xs text-on-surface text-center">FINANCIAL</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-sm bg-surface-container border border-surface-variant p-md hover:border-secondary-container transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-container text-[24px]">devices</span>
+<span class="font-code-sm text-xs text-on-surface text-center">TECH</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-sm bg-surface-container border border-surface-variant p-md hover:border-secondary-container transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-container text-[24px]">shopping_cart</span>
+<span class="font-code-sm text-xs text-on-surface text-center">E-COMM</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-sm bg-surface-container border border-surface-variant p-md hover:border-secondary-container transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary-container text-[24px]">memory</span>
+<span class="font-code-sm text-xs text-on-surface text-center">OTHER</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Navigation Actions -->
+<div class="flex justify-between items-center border-t border-surface-variant pt-md">
+<button class="text-on-surface-variant font-label-caps text-label-caps flex items-center gap-xs hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>ABORT</span>
+</button>
+<button class="amber-button px-lg py-sm font-label-caps text-label-caps uppercase flex items-center gap-xs">
+<span>PROCEED TO STAGE 02</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto bg-[#050505] docked full-width bottom-0 border-t-[1px] rounded-none border-zinc-900 border-t shadow-none">
+<div class="col-span-2 md:col-span-1 flex flex-col gap-sm">
+<span class="text-amber-500 font-bold font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase">© 2024 CHEETAH AGI // NEURAL PROTOCOL SECURED</span>
+<div class="flex gap-sm mt-sm">
+<!-- Compliance Badges -->
+<div class="border border-surface-variant px-xs py-[2px] font-code-sm text-[8px] text-surface-variant uppercase flex items-center gap-xs">
+<span class="material-symbols-outlined text-[10px]">verified_user</span> ISO 27001
+                </div>
+<div class="border border-surface-variant px-xs py-[2px] font-code-sm text-[8px] text-surface-variant uppercase flex items-center gap-xs">
+<span class="material-symbols-outlined text-[10px]">security</span> SOC2 TYPE II
+                </div>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-zinc-600 font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase hover:text-cyan-400 transition-colors duration-100" href="#">SYSTEM STATUS: OPTIMAL</a>
+<a class="text-zinc-600 font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase hover:text-cyan-400 transition-colors duration-100" href="#">LATENCY: 4MS</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-zinc-600 font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase hover:text-cyan-400 transition-colors duration-100" href="#">CORE ARCHIVE</a>
+<a class="text-zinc-600 font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase hover:text-cyan-400 transition-colors duration-100" href="#">UPLINK PROTOCOL</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-zinc-600 font-['JetBrains_Mono'] text-[10px] tracking-widest uppercase hover:text-cyan-400 transition-colors duration-100" href="#">NEURAL TWITTER</a>
+</div>
+</footer>
+</body></html>
