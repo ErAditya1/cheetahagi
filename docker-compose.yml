@@ -1,0 +1,12 @@
+services:
+  cheetah-agi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cheetah-agi:latest
+    container_name: cheetah-agi
+    ports:
+      - "3003:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
