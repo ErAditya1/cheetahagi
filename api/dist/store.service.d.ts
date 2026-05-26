@@ -2,7 +2,7 @@ import { OnModuleInit } from '@nestjs/common';
 import { Activity, Db } from './types';
 type CollectionName = keyof Db;
 export declare class StoreService implements OnModuleInit {
-    onModuleInit(): any;
+    onModuleInit(): Promise<void>;
     private seedIfNeeded;
     list<T>(collection: CollectionName): Promise<T[]>;
     publicList<T extends {
@@ -19,7 +19,16 @@ export declare class StoreService implements OnModuleInit {
     update<T extends Record<string, unknown>>(collection: CollectionName, id: string, payload: Partial<T>): Promise<any>;
     delete(collection: CollectionName, id: string): Promise<boolean>;
     activity(activity: Omit<Activity, 'id' | 'createdAt'>): Promise<any>;
-    getOverviewData(): unknown;
+    getOverviewData(): Promise<{
+        counts: {
+            products: number;
+            posts: number;
+            leads: number;
+            activities: number;
+        };
+        recentLeads: any[];
+        recentActivities: any[];
+    }>;
     private cleanDoc;
     private id;
 }

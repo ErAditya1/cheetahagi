@@ -3,9 +3,9 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 
 @Injectable()
 export class AuthService {
-  private readonly email = process.env.ADMIN_EMAIL ?? 'admin@cheetahagi.com';
-  private readonly password = process.env.ADMIN_PASSWORD ?? 'change-this-password';
-  private readonly secret = process.env.AUTH_SECRET ?? 'dev-only-secret-change-me';
+  private readonly email = (process.env.ADMIN_EMAIL ?? 'admin@cheetahagi.com').replace(/^["']|["']$/g, '');
+  private readonly password = (process.env.ADMIN_PASSWORD ?? 'change-this-password').replace(/^["']|["']$/g, '');
+  private readonly secret = (process.env.AUTH_SECRET ?? 'dev-only-secret-change-me').replace(/^["']|["']$/g, '');
 
   login(email: string, password: string) {
     if (email !== this.email || password !== this.password) {

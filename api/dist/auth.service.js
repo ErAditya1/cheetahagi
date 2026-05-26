@@ -10,9 +10,9 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const node_crypto_1 = require("node:crypto");
 let AuthService = class AuthService {
-    email = process.env.ADMIN_EMAIL ?? 'admin@cheetahagi.com';
-    password = process.env.ADMIN_PASSWORD ?? 'change-this-password';
-    secret = process.env.AUTH_SECRET ?? 'dev-only-secret-change-me';
+    email = (process.env.ADMIN_EMAIL ?? 'admin@cheetahagi.com').replace(/^["']|["']$/g, '');
+    password = (process.env.ADMIN_PASSWORD ?? 'change-this-password').replace(/^["']|["']$/g, '');
+    secret = (process.env.AUTH_SECRET ?? 'dev-only-secret-change-me').replace(/^["']|["']$/g, '');
     login(email, password) {
         if (email !== this.email || password !== this.password) {
             throw new common_1.UnauthorizedException('Invalid admin credentials');

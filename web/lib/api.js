@@ -1,9 +1,6 @@
 import { PRODUCTS, SERVICES, FAQS, CASE_STUDIES, BLOG_POSTS } from './content';
 
-const IS_SERVER = typeof window === 'undefined';
-const API_URL = IS_SERVER
-  ? (process.env.INTERNAL_API_URL || 'http://127.0.0.1:4000')
-  : (process.env.NEXT_PUBLIC_API_URL || '/api');
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 export async function apiGet(path) {
   try {
