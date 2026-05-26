@@ -1,10 +1,12 @@
 import { AuthService } from './auth.service';
 import { StoreService } from './store.service';
-import { Lead, Post as BlogPost, Product } from './types';
+import { MailService } from './mail.service';
+import { Post as BlogPost, Product } from './types';
 export declare class AppController {
     private readonly store;
     private readonly auth;
-    constructor(store: StoreService, auth: AuthService);
+    private readonly mail;
+    constructor(store: StoreService, auth: AuthService, mail: MailService);
     health(): {
         ok: boolean;
         service: string;
@@ -13,14 +15,14 @@ export declare class AppController {
     login(body: {
         email: string;
         password: string;
-    }): {
+    }): Promise<{
         token: string;
         user: {
             email: string;
             role: string;
         };
-    };
-    site(): {
+    }>;
+    site(): Promise<{
         products: {
             visible?: boolean;
             sortOrder?: number;
@@ -41,62 +43,51 @@ export declare class AppController {
             visible?: boolean;
             sortOrder?: number;
         }[];
-    };
-    products(): {
+    }>;
+    products(): Promise<{
         visible?: boolean;
         sortOrder?: number;
-    }[];
-    navbarProducts(): Product[];
-    product(slug: string): Product;
-    posts(): {
+    }[]>;
+    navbarProducts(): Promise<Product[]>;
+    product(slug: string): Promise<Product>;
+    posts(): Promise<{
         visible?: boolean;
         sortOrder?: number;
-    }[];
-    post(slug: string): BlogPost;
-    services(): {
+    }[]>;
+    post(slug: string): Promise<BlogPost>;
+    services(): Promise<{
         visible?: boolean;
         sortOrder?: number;
-    }[];
-    service(slug: string): any;
-    faqs(): {
+    }[]>;
+    service(slug: string): Promise<any>;
+    faqs(): Promise<{
         visible?: boolean;
         sortOrder?: number;
-    }[];
-    caseStudies(): {
+    }[]>;
+    caseStudies(): Promise<{
         visible?: boolean;
         sortOrder?: number;
-    }[];
-    submitForm(body: Record<string, unknown>): {
+    }[]>;
+    submitForm(body: Record<string, unknown>): Promise<{
         ok: boolean;
-        id: string;
-    };
-    track(body: Record<string, unknown>): {
-        type: string;
-        actor: string;
-        message: string;
-        metadata?: Record<string, unknown> | undefined;
-        id: string;
-        createdAt: string;
-    };
-    overview(): {
+        id: any;
+    }>;
+    track(body: Record<string, unknown>): Promise<any>;
+    overview(): Promise<{
         counts: {
             products: number;
             posts: number;
             leads: number;
             activities: number;
         };
-        recentLeads: Lead[];
-        recentActivities: import("./types").Activity[];
-    };
-    adminList(collection: string): unknown[];
-    adminCreate(collection: string, body: Record<string, unknown>): {
-        id: string;
-        createdAt: string;
-        updatedAt: string;
-    } & Record<string, unknown>;
-    adminUpdate(collection: string, id: string, body: Record<string, unknown>): Record<string, unknown>;
-    adminDelete(collection: string, id: string): {
+        recentLeads: any[];
+        recentActivities: any[];
+    }>;
+    adminList(collection: string): Promise<unknown[]>;
+    adminCreate(collection: string, body: Record<string, unknown>): Promise<any>;
+    adminUpdate(collection: string, id: string, body: Record<string, unknown>): Promise<any>;
+    adminDelete(collection: string, id: string): Promise<{
         ok: boolean;
-    };
+    }>;
     private normalize;
 }

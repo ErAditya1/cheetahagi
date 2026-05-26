@@ -4,9 +4,9 @@
   "private": true,
   "description": "Cheetah AGI - AI Consulting, Automation & Funnel Engineering",
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 4001",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next start -p 4001",
     "lint": "next lint"
   },
   "dependencies": {

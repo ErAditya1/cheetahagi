@@ -12,6 +12,7 @@ const app_controller_1 = require("./app.controller");
 const admin_guard_1 = require("./admin.guard");
 const auth_service_1 = require("./auth.service");
 const store_service_1 = require("./store.service");
+const mail_service_1 = require("./mail.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -19,7 +20,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
         controllers: [app_controller_1.AppController],
-        providers: [store_service_1.StoreService, auth_service_1.AuthService, admin_guard_1.AdminGuard],
+        providers: [store_service_1.StoreService, auth_service_1.AuthService, admin_guard_1.AdminGuard, mail_service_1.MailService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
