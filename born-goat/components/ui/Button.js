@@ -7,9 +7,9 @@ const baseClasses =
 
 const variants = {
   primary:
-    'bg-grad-gold text-obsidian border border-gold hover:shadow-gold-glow-lg hover:-translate-y-0.5',
+    'bg-gradient-to-r from-sports-blue to-sports-cyan text-slate-950 border-none hover:shadow-cyan-glow hover:-translate-y-0.5',
   ghost:
-    'bg-transparent text-white border border-titanium-deep hover:border-gold hover:text-gold hover:shadow-electric-glow'
+    'bg-transparent text-sports-pink border border-sports-pink/50 hover:border-sports-pink hover:bg-sports-pink/10 hover:shadow-pink-glow hover:-translate-y-0.5'
 };
 
 export default function Button({

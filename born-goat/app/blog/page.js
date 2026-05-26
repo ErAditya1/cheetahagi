@@ -31,17 +31,17 @@ export default function BlogIndexPage() {
       />
 
       {/* FEATURED */}
-      <section className="py-[80px] max-md:py-12 bg-obsidian">
+      <section className="py-[80px] max-md:py-12 bg-slate-950">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           <Reveal>
             <Link
               href={`/blog/${featured.slug}`}
-              className="block bg-obsidian-800 border border-line hover:border-gold transition-all duration-[400ms] hover:shadow-card-luxe relative overflow-hidden group"
+              className="block bg-slate-900 border border-line hover:border-sports-pink transition-all duration-[400ms] hover:shadow-card-luxe relative overflow-hidden group"
             >
               <span className="absolute top-0 left-0 right-0 h-0.5 bg-grad-gold scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
               <div className="p-14 max-sm:p-7">
                 <div className="flex gap-4 mb-8 flex-wrap items-center">
-                  <span className="font-mono text-[11px] tracking-extra-wide uppercase text-gold border border-gold px-3 py-1">
+                  <span className="font-mono text-[11px] tracking-extra-wide uppercase text-sports-pink border border-sports-pink px-3 py-1">
                     FEATURED
                   </span>
                   <span className="font-mono text-[11px] tracking-extra-wide uppercase text-titanium-dim">
@@ -88,27 +88,27 @@ export default function BlogIndexPage() {
       </section>
 
       {/* GRID */}
-      <section className="py-[80px] max-md:py-12 bg-obsidian">
+      <section className="py-[100px] max-md:py-16 bg-slate-950">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           <div className="grid grid-cols-2 max-md:grid-cols-1 gap-8">
             {rest.map((p, i) => (
               <Reveal key={p.slug} delay={i * 60}>
                 <Link
                   href={`/blog/${p.slug}`}
-                  className="block p-10 max-sm:p-7 border border-line bg-obsidian-800 hover:border-gold transition-all duration-[400ms] hover:-translate-y-1 hover:shadow-electric-glow h-full flex flex-col group"
+                  className="block p-10 max-sm:p-7 border border-line bg-slate-900 hover:border-sports-pink transition-all duration-[400ms] hover:-translate-y-1 hover:shadow-electric-glow h-full flex flex-col group"
                 >
                   <div className="mb-6">
-                    <span className="font-mono text-[10px] tracking-extra-wide uppercase text-gold">
+                    <span className="font-mono text-[10px] tracking-extra-wide uppercase text-sports-pink">
                       {p.category} · {p.date} · {p.readTime}
                     </span>
                   </div>
-                  <h3 className="font-display text-[28px] leading-[1] tracking-cinematic uppercase mb-5 text-white">
+                  <h3 className="font-display text-[clamp(20px,2.4vw,28px)] tracking-cinematic uppercase text-sports-pink leading-[1.15] group-hover:text-sports-pink transition-colors mb-5">
                     {p.title}
                   </h3>
                   <p className="text-[15px] text-titanium leading-[1.7] mb-7 flex-grow">
                     {p.excerpt}
                   </p>
-                  <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-extra-wide uppercase text-gold self-start">
+                  <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-extra-wide uppercase text-sports-pink self-start">
                     READ
                     <span className="transition-transform duration-300 group-hover:translate-x-1">
                       →

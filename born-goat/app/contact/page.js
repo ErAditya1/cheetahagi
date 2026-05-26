@@ -25,13 +25,13 @@ export default function ContactPage() {
         lede="A senior partner reads every inbound brief personally. Reply within 24 hours, usually faster. No bots, no junior triage."
       />
 
-      <section className="py-[100px] max-md:py-16 bg-obsidian">
+      <section className="py-[100px] max-md:py-16 bg-slate-950">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           {/* CHANNELS */}
           <div className="grid grid-cols-3 max-md:grid-cols-1 gap-px bg-line border border-line mb-20 max-md:mb-12">
             <Reveal>
-              <div className="bg-obsidian-800 p-12 max-sm:p-7">
-                <div className="font-display text-3xl text-gold mb-7 tracking-cinematic leading-none">
+              <div className="bg-slate-900 p-12 max-sm:p-7">
+                <div className="font-display text-3xl text-sports-pink mb-7 tracking-cinematic leading-none">
                   I
                 </div>
                 <h3 className="font-display text-[26px] tracking-cinematic uppercase mb-3 text-white">
@@ -43,7 +43,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="font-mono text-[14px] text-gold hover:text-gold-bright tracking-[0.05em] border-b border-gold pb-0.5 transition-colors"
+                  className="font-mono text-[14px] text-sports-pink hover:text-sports-pink-bright tracking-[0.05em] border-b border-line pb-0.5 transition-colors"
                 >
                   {SITE.email}
                 </a>
@@ -51,8 +51,8 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={80}>
-              <div className="bg-obsidian-800 p-12 max-sm:p-7">
-                <div className="font-display text-3xl text-gold mb-7 tracking-cinematic leading-none">
+              <div className="bg-slate-900 p-12 max-sm:p-7">
+                <div className="font-display text-3xl text-sports-pink mb-7 tracking-cinematic leading-none">
                   II
                 </div>
                 <h3 className="font-display text-[26px] tracking-cinematic uppercase mb-3 text-white">
@@ -66,7 +66,7 @@ export default function ContactPage() {
                   href="https://wa.me/+919999999999"
                   target="_blank"
                   rel="noopener"
-                  className="font-mono text-[14px] text-gold hover:text-gold-bright tracking-[0.05em] border-b border-gold pb-0.5 transition-colors"
+                  className="font-mono text-[14px] text-sports-pink hover:text-sports-pink-bright tracking-[0.05em] border-b border-line pb-0.5 transition-colors"
                 >
                   +91 99999 99999
                 </a>
@@ -74,8 +74,8 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="bg-obsidian-800 p-12 max-sm:p-7">
-                <div className="font-display text-3xl text-gold mb-7 tracking-cinematic leading-none">
+              <div className="bg-slate-900 p-12 max-sm:p-7">
+                <div className="font-display text-3xl text-sports-pink mb-7 tracking-cinematic leading-none">
                   III
                 </div>
                 <h3 className="font-display text-[26px] tracking-cinematic uppercase mb-3 text-white">
@@ -102,16 +102,16 @@ export default function ContactPage() {
                 <h2 className="font-display text-[clamp(40px,5.5vw,72px)] leading-[0.95] tracking-cinematic uppercase mt-7 mb-8">
                   THE BRIEF FORM,
                   <br />
-                  <span className="text-gold">FOUR STEPS.</span>
+                  <span className="text-sports-pink">FOUR STEPS.</span>
                 </h2>
                 <p className="text-[16px] text-titanium leading-[1.75] mb-9 max-w-[480px]">
                   Tell us who you are, what you are building, and where the
                   brief sits in its arc. By the time you reach the final step,
                   we will have enough to write back something useful.
                 </p>
-                <div className="border-l-2 border-gold pl-6 space-y-5">
+                <div className="border-l-2 border-line pl-6 space-y-5">
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-1">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-sports-pink mb-1">
                       READ BY
                     </div>
                     <div className="text-titanium-bright text-[15px]">
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-1">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-sports-pink mb-1">
                       REPLY WITHIN
                     </div>
                     <div className="text-titanium-bright text-[15px]">
@@ -128,7 +128,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-1">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-sports-pink mb-1">
                       WHAT HAPPENS NEXT
                     </div>
                     <div className="text-titanium-bright text-[15px]">

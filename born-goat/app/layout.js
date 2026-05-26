@@ -36,20 +36,20 @@ const mono = JetBrains_Mono({
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://borngoat.com'),
   title: {
-    default: 'BORN GOAT · Elite Sports Marketing House',
+    default: 'BORN GOAT · Live Sports Hub & Real-time Analytics',
     template: '%s · BORN GOAT'
   },
   description:
-    'An elite sports marketing house for athletes, leagues and brands engineered for legacy. Narrative, PR, brand, sponsorship, crisis, amplification — one signature.',
+    'Next-gen sports coverage, analytics, and live dashboards. Tracking the world’s elite leagues, teams, and athletes in real time.',
   keywords: [
-    'sports marketing',
-    'athlete branding',
-    'sports PR',
-    'sponsorship strategy',
-    'sports crisis management',
-    'league formation',
-    'Indian sports agency',
-    'premium sports marketing'
+    'live sports',
+    'sports analytics',
+    'live scoreboards',
+    'cricket tracker',
+    'sports data',
+    'league rankings',
+    'Indian sports dashboard',
+    'premium sports platform'
   ],
   authors: [{ name: 'Born GOAT' }],
   openGraph: {
@@ -57,23 +57,23 @@ export const metadata = {
     locale: 'en_IN',
     url: 'https://borngoat.com',
     siteName: 'BORN GOAT',
-    title: 'BORN GOAT · Elite Sports Marketing House',
+    title: 'BORN GOAT · Live Sports Hub & Real-time Analytics',
     description:
-      'An elite sports marketing house for athletes, leagues and brands engineered for legacy.',
+      'Next-gen sports coverage, analytics, and live dashboards. Tracking the world’s elite leagues, teams, and athletes in real time.',
     images: [
       {
         url: '/og-default.svg',
         width: 1200,
         height: 630,
-        alt: 'BORN GOAT — Born Greatest of All Time'
+        alt: 'BORN GOAT — Live Sports Hub'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BORN GOAT · Elite Sports Marketing House',
+    title: 'BORN GOAT · Live Sports Hub & Real-time Analytics',
     description:
-      'An elite sports marketing house for athletes, leagues and brands engineered for legacy.',
+      'Next-gen sports coverage, analytics, and live dashboards. Tracking the world’s elite leagues, teams, and athletes in real time.',
     images: ['/og-default.svg']
   },
   robots: {
@@ -96,7 +96,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${bebas.variable} ${anton.variable} ${inter.variable} ${mono.variable}`}>
-      <body className="bg-obsidian text-white">
+      <body className="bg-slate-950 text-white">
         <OrgSchema />
         <Nav />
         <main>{children}</main>

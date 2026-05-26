@@ -19,11 +19,11 @@ export default function Nav() {
       style={{
         backdropFilter: 'blur(20px) saturate(1.4)',
         WebkitBackdropFilter: 'blur(20px) saturate(1.4)',
-        background: 'rgba(10, 10, 10, 0.78)'
+        background: 'rgba(2, 6, 23, 0.78)'
       }}
     >
       <Link href="/" className="flex items-center gap-3.5 text-white group">
-        <div className="relative w-9 h-9 flex items-center justify-center rounded-full border border-titanium/50 overflow-hidden bg-obsidian-800 transition-colors duration-300 group-hover:border-gold">
+        <div className="relative w-9 h-9 flex items-center justify-center rounded-full border border-titanium/50 overflow-hidden bg-slate-900 transition-colors duration-300 group-hover:border-sports-cyan">
           <Image
             src="/icon.png"
             alt="BORN GOAT Logo"
@@ -34,7 +34,7 @@ export default function Nav() {
           />
         </div>
         <span className="font-display text-[22px] tracking-[0.06em] uppercase">
-          BORN <span className="text-gold">G</span>OAT
+          BORN <span className="bg-gradient-to-r from-sports-blue via-sports-cyan to-sports-pink bg-clip-text text-transparent font-black">G</span>OAT
         </span>
       </Link>
 
@@ -44,13 +44,13 @@ export default function Nav() {
             key={item.key}
             href={item.href}
             className={`max-lg:hidden font-mono text-xs font-medium tracking-wide-cap uppercase transition-colors relative ${
-              isActive(item.href) ? 'text-gold' : 'text-titanium hover:text-white'
+              isActive(item.href) ? 'text-sports-cyan' : 'text-titanium hover:text-white'
             }`}
             style={{ letterSpacing: '0.18em' }}
           >
             {item.label}
             <span
-              className={`absolute left-0 -bottom-1.5 h-px bg-gold transition-[right] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
+              className={`absolute left-0 -bottom-1.5 h-px bg-sports-cyan transition-[right] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
                 isActive(item.href) ? 'right-0' : 'right-full'
               }`}
             />
@@ -58,9 +58,9 @@ export default function Nav() {
         ))}
         <Link
           href="/contact"
-          className="bg-grad-gold text-obsidian px-[26px] py-[13px] font-mono text-[11px] font-bold uppercase tracking-extra-wide border border-gold transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:shadow-gold-glow hover:-translate-y-px relative overflow-hidden"
+          className="bg-gradient-to-r from-sports-blue to-sports-cyan text-slate-950 px-[26px] py-[13px] font-mono text-[11px] font-bold uppercase tracking-extra-wide transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:shadow-cyan-glow hover:-translate-y-px relative overflow-hidden"
         >
-          Book Call →
+          Get Premium →
         </Link>
       </div>
     </nav>

@@ -10,9 +10,9 @@ import JournalPreview from '@/components/sections/JournalPreview';
 import ContactCTA from '@/components/sections/ContactCTA';
 
 export const metadata = {
-  title: 'BORN GOAT · Elite Sports Marketing House',
+  title: 'BORN GOAT · Live Sports Hub & Real-time Analytics',
   description:
-    'An elite sports marketing house for athletes, leagues and brands engineered for legacy. Narrative, PR, brand, sponsorship, crisis, amplification — one signature.',
+    'Next-gen sports coverage, analytics, and live dashboards. Tracking the world’s elite leagues, teams, and athletes in real time.',
   alternates: { canonical: '/' }
 };
 
@@ -31,12 +31,12 @@ export default function HomePage() {
       <ContactCTA
         heading={
           <>
-            IF YOU ARE BUILDING
+            WANT TO CONNECT
             <br />
-            SOMETHING THAT SHOULD
+            YOUR LEAGUE TO REAL-TIME
           </>
         }
-        goldHeading="OUTLIVE THE SEASON — TALK TO US."
+        goldHeading="ANALYTICS & FEEDS? INTEGRATE."
       />
     </>
   );

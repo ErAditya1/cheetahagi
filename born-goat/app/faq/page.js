@@ -29,7 +29,7 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }}
       />
 
-      <section className="py-[100px] max-md:py-16 bg-obsidian">
+      <section className="py-[100px] max-md:py-16 bg-slate-950">
         <div className="max-w-[1100px] mx-auto px-10 max-sm:px-[22px]">
           {faqs.map((section, si) => (
             <div key={section.section} className="mb-20 max-md:mb-12">

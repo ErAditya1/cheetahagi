@@ -7,7 +7,7 @@ export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede
         className="absolute -top-[20%] -right-[15%] w-[70vw] h-[70vw] pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, rgba(212,168,79,0.4) 0%, transparent 55%)',
+            'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 55%)',
           opacity: 0.5,
           filter: 'blur(80px)'
         }}
@@ -23,17 +23,17 @@ export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede
       />
       <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px] relative z-[5]">
         {crumbs.length > 0 && (
-          <div className="font-mono text-[11px] tracking-extra-wide uppercase text-titanium-deep mb-8">
+          <div className="font-mono text-[11px] tracking-extra-wide uppercase text-slate-500 mb-8">
             {crumbs.map((c, i) => (
               <span key={i}>
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-gold transition-colors">
+                  <Link href={c.href} className="hover:text-sports-cyan transition-colors">
                     {c.label}
                   </Link>
                 ) : (
                   <span>{c.label}</span>
                 )}
-                {i < crumbs.length - 1 && <span className="text-gold mx-3">/</span>}
+                {i < crumbs.length - 1 && <span className="text-sports-pink mx-3">/</span>}
               </span>
             ))}
           </div>
@@ -45,12 +45,12 @@ export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede
           className="font-display text-[clamp(64px,11vw,180px)] leading-[0.9] tracking-cinematic uppercase max-w-[1200px]"
           dangerouslySetInnerHTML={{
             __html: italicWord
-              ? title.replace(italicWord, `<span class="text-gold">${italicWord}</span>`)
+              ? title.replace(italicWord, `<span class="text-sports-cyan">${italicWord}</span>`)
               : title
           }}
         />
         {lede && (
-          <p className="mt-9 text-[18px] text-titanium max-w-[680px] leading-[1.65]">
+          <p className="mt-9 text-[18px] text-slate-400 max-w-[680px] leading-[1.65]">
             {lede}
           </p>
         )}

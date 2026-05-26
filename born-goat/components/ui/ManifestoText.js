@@ -33,19 +33,19 @@ export default function ManifestoText() {
     >
       <style jsx>{`
         span {
-          color: #5a5e64;
+          color: #475569;
           transition: color 0.7s ease, text-shadow 0.7s ease;
         }
         :global(.lit) {
           color: #ffffff !important;
         }
         .gold-emph {
-          color: #9d7b35;
+          color: #0891B2;
           font-style: italic;
         }
         :global(.gold-emph.lit) {
-          color: #d4a84f !important;
-          text-shadow: 0 0 50px rgba(212, 168, 79, 0.4);
+          color: #06B6D4 !important;
+          text-shadow: 0 0 50px rgba(6, 182, 212, 0.5);
         }
       `}</style>
       <span>GREATNESS IS NOT AN ACCIDENT.</span>{' '}

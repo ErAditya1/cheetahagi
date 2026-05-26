@@ -6,9 +6,9 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import { services, engagements } from '@/lib/content';
 
 export const metadata = {
-  title: 'The Practice',
+  title: 'Live Center',
   description:
-    'Six disciplines, one house. Narrative engineering, sports PR, athlete and league brand, sponsorship strategy, crisis and reputation, amplification and distribution.',
+    'Real-time sports data feeds, AI analytics, player index, league dashboards, and custom API integration.',
   alternates: { canonical: '/services' }
 };
 
@@ -18,33 +18,33 @@ export default function ServicesPage() {
       <PageHero
         crumbs={[
           { label: 'BORN GOAT', href: '/' },
-          { label: 'The Practice' }
+          { label: 'Live Center' }
         ]}
-        eyebrow="THE PRACTICE"
-        title="SIX DISCIPLINES. ONE SIGNATURE."
-        italicWord="ONE SIGNATURE"
-        lede="Each practice can be retained on its own. Most of our long-term clients are on the full-house engagement — all six coordinated under a single strategy and a single senior partner."
+        eyebrow="LIVE CENTER"
+        title="SIX MODULES. MILLISECOND UPDATES."
+        italicWord="MILLISECOND UPDATES"
+        lede="Each module is available via standard API keys or responsive widgets. We also design custom integrations for elite tournament leagues and federations."
       />
 
       {/* SERVICES */}
-      <section className="py-[140px] max-md:py-20 bg-obsidian">
+      <section className="py-[140px] max-md:py-20 bg-slate-950">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           <div className="space-y-px bg-line border border-line">
             {services.map((s, i) => (
               <Reveal key={s.slug} delay={i * 40}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="bg-obsidian-800 hover:bg-obsidian-700 p-12 max-sm:p-7 grid grid-cols-[120px_1fr_auto] max-md:grid-cols-1 gap-12 max-md:gap-6 items-start transition-colors duration-[400ms] cursor-pointer group block"
+                  className="bg-slate-900 hover:bg-slate-800 p-12 max-sm:p-7 grid grid-cols-[120px_1fr_auto] max-md:grid-cols-1 gap-12 max-md:gap-6 items-start transition-colors duration-[400ms] cursor-pointer group block"
                 >
-                  <div className="font-display text-[72px] max-md:text-5xl text-titanium-deep leading-none tracking-cinematic transition-colors duration-[400ms] group-hover:text-gold">
+                  <div className="font-display text-[72px] max-md:text-5xl text-slate-700 leading-none tracking-cinematic transition-colors duration-[400ms] group-hover:text-sports-cyan">
                     {s.number}
                   </div>
                   <div>
                     <h3 className="font-display text-[clamp(28px,3.5vw,48px)] leading-[0.95] tracking-cinematic uppercase mb-4 text-white">
                       {s.title}
                     </h3>
-                    <p className="text-titanium text-[16px] leading-[1.7] mb-4 max-w-[680px]">
-                      <span className="text-gold italic font-medium">
+                    <p className="text-slate-400 text-[16px] leading-[1.7] mb-4 max-w-[680px]">
+                      <span className="text-sports-cyan italic font-medium">
                         {s.tagline}
                       </span>{' '}
                       {s.description}
@@ -53,15 +53,15 @@ export default function ServicesPage() {
                       {s.tags.map((tag, ti) => (
                         <span
                           key={ti}
-                          className="font-mono text-[10px] tracking-wide-cap uppercase text-titanium-dim border border-line px-2.5 py-1"
+                          className="font-mono text-[10px] tracking-wide-cap uppercase text-slate-500 border border-line px-2.5 py-1"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <div className="self-center font-mono text-[11px] tracking-extra-wide uppercase text-gold flex items-center gap-2 max-md:mt-2">
-                    READ MORE
+                  <div className="self-center font-mono text-[11px] tracking-extra-wide uppercase text-sports-pink flex items-center gap-2 max-md:mt-2">
+                    EXPLORE MODULE
                     <span className="transition-transform duration-300 group-hover:translate-x-1.5">
                       →
                     </span>
@@ -74,16 +74,15 @@ export default function ServicesPage() {
       </section>
 
       {/* ENGAGEMENTS */}
-      <section className="py-[140px] max-md:py-20 bg-obsidian-800 border-t border-line">
+      <section className="py-[140px] max-md:py-20 bg-slate-900 border-t border-line">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           <Reveal className="mb-20 max-w-[920px]">
-            <Eyebrow className="mb-7">ENGAGEMENT</Eyebrow>
+            <Eyebrow className="mb-7">INTEGRATION</Eyebrow>
             <h2 className="font-display text-[clamp(40px,6vw,84px)] leading-[0.95] tracking-cinematic uppercase mt-7">
-              HOW WE <span className="text-gold">WORK.</span>
+              HOW WE <span className="text-sports-cyan">ENGAGE.</span>
             </h2>
-            <p className="text-titanium text-[17px] leading-[1.7] max-w-[620px] mt-7">
-              Three engagement structures. The right one depends on the brief —
-              a first conversation will tell us which.
+            <p className="text-slate-300 text-[17px] leading-[1.7] max-w-[620px] mt-7">
+              Three flexible tiers of service. Select the right feed level for your application, or contact our integration team for customized setup.
             </p>
           </Reveal>
 
@@ -91,18 +90,18 @@ export default function ServicesPage() {
             {engagements.map((e, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div
-                  className={`bg-obsidian p-10 max-sm:p-7 border ${
+                  className={`bg-slate-950 p-10 max-sm:p-7 border ${
                     e.featured
-                      ? 'border-gold relative shadow-[0_30px_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,168,79,0.3)]'
+                      ? 'border-sports-cyan relative shadow-cyan-glow'
                       : 'border-line'
                   } h-full flex flex-col`}
                 >
                   {e.featured && (
-                    <span className="absolute -top-3 left-7 bg-grad-gold text-obsidian text-[10px] font-mono font-bold tracking-extra-wide uppercase px-3 py-1">
-                      Most Engaged
+                    <span className="absolute -top-3 left-7 bg-gradient-to-r from-sports-blue to-sports-cyan text-slate-950 text-[10px] font-mono font-bold tracking-extra-wide uppercase px-3 py-1">
+                      Most Active
                     </span>
                   )}
-                  <div className="font-display text-3xl text-gold mb-5 tracking-cinematic leading-none">
+                  <div className="font-display text-3xl text-sports-cyan mb-5 tracking-cinematic leading-none">
                     {e.roman}
                   </div>
                   <h3 className="font-display text-[28px] leading-[0.95] tracking-cinematic uppercase mb-3 text-white">
@@ -112,20 +111,20 @@ export default function ServicesPage() {
                     <span className="font-display text-[40px] text-white leading-none tracking-cinematic">
                       {e.price}
                     </span>
-                    <span className="font-mono text-[11px] uppercase text-titanium-dim tracking-wide-cap">
+                    <span className="font-mono text-[11px] uppercase text-slate-500 tracking-wide-cap">
                       {e.per}
                     </span>
                   </div>
-                  <p className="text-[14px] text-titanium leading-[1.7] mb-6 flex-grow">
+                  <p className="text-[14px] text-slate-400 leading-[1.7] mb-6 flex-grow">
                     {e.description}
                   </p>
                   <ul className="list-none space-y-2.5">
                     {e.features.map((f, fi) => (
                       <li
                         key={fi}
-                        className="text-[13px] text-titanium leading-[1.5] pl-5 relative"
+                        className="text-[13px] text-slate-400 leading-[1.5] pl-5 relative"
                       >
-                        <span className="absolute left-0 top-0 text-gold">
+                        <span className="absolute left-0 top-0 text-sports-pink">
                           ◆
                         </span>
                         {f}
@@ -140,10 +139,10 @@ export default function ServicesPage() {
       </section>
 
       <ContactCTA
-        eyebrow="ENGAGE THE PRACTICE"
-        heading="BRING US"
-        goldHeading="A BRIEF."
-        sub="The first conversation is unhurried and free. By the end of it, we will both know whether this is the right firm for the work."
+        eyebrow="INTEGRATE THE PIPELINE"
+        heading="REQUEST LIVE FEED ACCESS"
+        goldHeading="TODAY."
+        sub="Sign up for a developer sandbox key or consult our integrations team for custom tournament scoring dashboards."
       />
     </>
   );

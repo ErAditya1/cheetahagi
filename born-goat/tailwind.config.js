@@ -8,30 +8,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Titanium Dynasty — Obsidian canvas
+        // Titanium Dynasty — Obsidian canvas (retained for backward compatibility, mapped to deep slate)
         obsidian: {
-          DEFAULT: '#0A0A0A',
-          900: '#0A0A0A',
-          800: '#111111',
-          700: '#171717',
-          600: '#1D1D1D',
-          500: '#252525'
+          DEFAULT: '#020617',
+          900: '#020617',
+          800: '#0F172A',
+          700: '#1E293B',
+          600: '#334155',
+          500: '#475569'
         },
-        carbon: '#0d0d0d',
-        // Titanium silver family
+        carbon: '#020617',
+        // Titanium silver family (updated to slate/titanium mix)
         titanium: {
-          DEFAULT: '#C7CCD4',
-          bright: '#E5E8EC',
-          DEFAULT_bg: '#C7CCD4',
-          dim: '#8A8F97',
-          deep: '#5A5E64',
-          steel: '#3A3D42'
+          DEFAULT: '#94A3B8',
+          bright: '#F1F5F9',
+          DEFAULT_bg: '#1E293B',
+          dim: '#64748B',
+          deep: '#475569',
+          steel: '#334155'
         },
-        // Championship gold (used sparingly)
+        // Championship gold (mapped to sports-pink / cyan for compatibility transition)
         gold: {
-          DEFAULT: '#D4A84F',
-          bright: '#F5D27A',
-          deep: '#9D7B35'
+          DEFAULT: '#06B6D4',
+          bright: '#22D3EE',
+          deep: '#0891B2'
         },
         // Electric velocity (motion accent)
         electric: {
@@ -40,11 +40,24 @@ module.exports = {
         },
         // Hyper crimson (urgency only)
         crimson: {
-          DEFAULT: '#FF3B30',
-          deep: '#C8261D'
+          DEFAULT: '#EC4899',
+          deep: '#DB2777'
         },
-        line: '#222428',
-        'line-bright': '#2E3138'
+        line: '#1E293B',
+        'line-bright': '#334155',
+        // Live Sports Hub theme colors
+        'sports-blue': {
+          DEFAULT: '#3B82F6',
+          bright: '#60A5FA'
+        },
+        'sports-pink': {
+          DEFAULT: '#EC4899',
+          bright: '#F472B6'
+        },
+        'sports-cyan': {
+          DEFAULT: '#06B6D4',
+          bright: '#22D3EE'
+        }
       },
       fontFamily: {
         display: ['var(--font-bebas)', 'sans-serif'],
@@ -53,17 +66,25 @@ module.exports = {
         mono: ['var(--font-mono)', 'monospace']
       },
       backgroundImage: {
-        'grad-gold': 'linear-gradient(135deg, #D4A84F 0%, #F5D27A 100%)',
-        'grad-gold-deep': 'linear-gradient(135deg, #9D7B35 0%, #D4A84F 60%, #F5D27A 100%)',
-        'grad-titanium': 'linear-gradient(135deg, #C7CCD4 0%, #E5E8EC 50%, #8A8F97 100%)',
-        'grad-electric': 'linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%)',
-        'carbon-fiber': "repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 1px, transparent 1px, transparent 2px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 1px, transparent 1px, transparent 2px)"
+        'grad-gold': 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', // mapped to blue-cyan for quick compatibility
+        'grad-gold-deep': 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #EC4899 100%)', // mapped to blue-cyan-pink
+        'grad-titanium': 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+        'grad-electric': 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
+        'grad-sports-primary': 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
+        'grad-sports-secondary': 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
+        'grad-blue-pink': 'linear-gradient(135deg, #3B82F6 0%, #EC4899 100%)',
+        'carbon-fiber': "repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 1px, transparent 1px, transparent 2px)"
       },
       boxShadow: {
-        'gold-glow': '0 0 30px rgba(212, 168, 79, 0.4)',
-        'gold-glow-lg': '0 0 50px rgba(212, 168, 79, 0.5)',
+        'gold-glow': '0 0 30px rgba(6, 182, 212, 0.4)',
+        'gold-glow-lg': '0 0 50px rgba(6, 182, 212, 0.5)',
         'electric-glow': '0 0 20px rgba(59, 130, 246, 0.4)',
-        'card-luxe': '0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 168, 79, 0.3)'
+        'blue-glow': '0 0 30px rgba(59, 130, 246, 0.4)',
+        'pink-glow': '0 0 30px rgba(236, 72, 153, 0.4)',
+        'cyan-glow': '0 0 30px rgba(6, 182, 212, 0.4)',
+        'cyan-glow-lg': '0 0 50px rgba(6, 182, 212, 0.6)',
+        'card-luxe': '0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(6, 182, 212, 0.25)',
+        'card-sports': '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(6, 182, 212, 0.25)'
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
@@ -75,8 +96,8 @@ module.exports = {
       },
       keyframes: {
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 18px rgba(212, 168, 79, 0.4)', opacity: 1 },
-          '50%': { boxShadow: '0 0 30px rgba(212, 168, 79, 0.5)', opacity: 0.85 }
+          '0%, 100%': { boxShadow: '0 0 18px rgba(6, 182, 212, 0.4)', opacity: 1 },
+          '50%': { boxShadow: '0 0 30px rgba(6, 182, 212, 0.5)', opacity: 0.85 }
         },
         slowRotate: {
           from: { transform: 'rotate(0deg)' },

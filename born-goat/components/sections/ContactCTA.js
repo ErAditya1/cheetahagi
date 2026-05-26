@@ -3,21 +3,21 @@ import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 
 export default function ContactCTA({
-  eyebrow = 'BY INVITATION, BY CONVERSATION',
+  eyebrow = 'GET ACCESS OR INTEGRATE',
   heading,
   goldHeading,
-  sub = 'We accept three new clients per quarter. The first conversation is unhurried, free, and structured to be useful whether or not we end up working together.',
-  primaryLabel = 'Begin a Conversation',
+  sub = 'Access our live statistics API, white-labeled widgets, or custom dashboards. We review sandbox requests and support tickets daily.',
+  primaryLabel = 'Get API Key',
   secondaryLabel = 'Read the FAQ',
   secondaryHref = '/faq'
 }) {
   return (
-    <section className="py-[180px] max-md:py-24 bg-obsidian border-t border-line relative overflow-hidden">
+    <section className="py-[180px] max-md:py-24 bg-slate-950 border-t border-line relative overflow-hidden">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[60vh] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(212,168,79,0.4), transparent 70%)',
+            'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(6,182,212,0.4), transparent 70%)',
           filter: 'blur(60px)',
           opacity: 0.4
         }}
@@ -31,11 +31,11 @@ export default function ContactCTA({
               {goldHeading && (
                 <>
                   {' '}
-                  <span className="text-gold">{goldHeading}</span>
+                  <span className="text-sports-pink">{goldHeading}</span>
                 </>
               )}
             </h2>
-            <p className="max-w-[620px] mx-auto mb-12 text-titanium text-[17px] leading-[1.7]">
+            <p className="max-w-[620px] mx-auto mb-12 text-slate-400 text-[17px] leading-[1.7]">
               {sub}
             </p>
             <div className="flex gap-3.5 justify-center flex-wrap">
