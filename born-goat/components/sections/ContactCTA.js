@@ -7,7 +7,7 @@ export default function ContactCTA({
   heading,
   goldHeading,
   sub = 'Access our live statistics API, white-labeled widgets, or custom dashboards. We review sandbox requests and support tickets daily.',
-  primaryLabel = 'Get API Key',
+  primaryLabel = 'Begin a Conversation',
   secondaryLabel = 'Read the FAQ',
   secondaryHref = '/faq'
 }) {

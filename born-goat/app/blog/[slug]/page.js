@@ -101,7 +101,7 @@ export default function BlogPostPage({ params }) {
         <div className="max-w-[800px] mx-auto px-10 max-sm:px-[22px]">
           <div
             className="prose-luxe"
-            dangerouslySetInnerHTML={{ __html: post.body }}
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           <div className="divider-ornament mt-20">

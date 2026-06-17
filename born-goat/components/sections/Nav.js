@@ -43,16 +43,14 @@ export default function Nav() {
           <Link
             key={item.key}
             href={item.href}
-            className={`max-lg:hidden font-mono text-xs font-medium tracking-wide-cap uppercase transition-colors relative ${
-              isActive(item.href) ? 'text-sports-cyan' : 'text-titanium hover:text-white'
-            }`}
+            className={`max-lg:hidden font-mono text-xs font-medium tracking-wide-cap uppercase transition-colors relative ${isActive(item.href) ? 'text-sports-cyan' : 'text-titanium hover:text-white'
+              }`}
             style={{ letterSpacing: '0.18em' }}
           >
             {item.label}
             <span
-              className={`absolute left-0 -bottom-1.5 h-px bg-sports-cyan transition-[right] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
-                isActive(item.href) ? 'right-0' : 'right-full'
-              }`}
+              className={`absolute left-0 -bottom-1.5 h-px bg-sports-cyan transition-[right] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${isActive(item.href) ? 'right-0' : 'right-full'
+                }`}
             />
           </Link>
         ))}
@@ -60,7 +58,7 @@ export default function Nav() {
           href="/contact"
           className="bg-gradient-to-r from-sports-blue to-sports-cyan text-slate-950 px-[26px] py-[13px] font-mono text-[11px] font-bold uppercase tracking-extra-wide transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:shadow-cyan-glow hover:-translate-y-px relative overflow-hidden"
         >
-          Get Premium →
+          Book a Call →
         </Link>
       </div>
     </nav>

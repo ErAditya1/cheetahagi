@@ -371,7 +371,7 @@ export const faqs = [
     items: [
       {
         q: 'How can I get access to the GraphQL API?',
-        a: 'You can sign up for a developer sandbox key by clicking "Get Premium" and submitting a request. Standard sandbox tier is free and supports up to 10 requests/minute for testing.'
+        a: 'You can sign up for a developer sandbox key by clicking "Book a Call" and submitting a request. Standard sandbox tier is free and supports up to 10 requests/minute for testing.'
       },
       {
         q: 'Can I embed the live widgets in my own sports blog?',
