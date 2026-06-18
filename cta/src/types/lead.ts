@@ -8,7 +8,7 @@ export interface UTMParams {
 }
 
 // Flat payload sent to API for full lead step
-export interface LeadPayload extends UTMParams {
+export interface LeadPayload {
   type: 'newsletter' | 'whatsapp-funnel';
   source: 'cta-funnel';
   stage: 'email' | 'profile';
@@ -16,6 +16,7 @@ export interface LeadPayload extends UTMParams {
   phone?: string;
   name?: string;
   joined_whatsapp?: boolean;
+  [key: string]: unknown;
 }
 
 // API response
