@@ -37,12 +37,15 @@ async function bootstrap() {
   app.enableCors({
     origin: process.env.CORS?.split(',') || [
       'http://localhost:4001',
+      'http://localhost:3000',
       'http://localhost:4002',
       'http://127.0.0.1:4001',
       'http://127.0.0.1:4002',
       'https://cheetahagi.com',
       'https://billionairevox.com',
+      'https://admin.cheetahagi.com',
       'https://api.cheetahagi.com',
+      'https://links.feedingtrends.com',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,

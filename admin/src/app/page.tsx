@@ -6,6 +6,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 const WEB_URL = process.env.NEXT_PUBLIC_WEB_URL || "http://localhost:3001";
 const collections = ["products", "posts", "services", "leads", "activities"] as const;
 type Collection = (typeof collections)[number];
+const navItems = ["products", "posts", "services", "leads", "cta leads", "activities"] as const;
+type NavItem = (typeof navItems)[number];
 
 type Item = Record<string, any>;
 
@@ -52,7 +54,7 @@ export default function AdminPage() {
   const [token, setToken] = useState("");
   const [email, setEmail] = useState("admin@cheetahagi.com");
   const [password, setPassword] = useState("change-this-password");
-  const [active, setActive] = useState<Collection>("products");
+  const [active, setActive] = useState<NavItem>("products");
   const [items, setItems] = useState<Record<Collection, Item[]>>({
     products: [],
     posts: [],
@@ -64,8 +66,18 @@ export default function AdminPage() {
   const [error, setError] = useState("");
 
   const displayedItems = useMemo(() => {
-    const current = items[active] || [];
-    if (active === "leads" || active === "activities") {
+    if (active === "cta leads") {
+      return [...items.leads]
+        .filter((l) => l.source === "cta-funnel")
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
+    const current = items[active as Collection] || [];
+    if (active === "leads") {
+      return [...current]
+        .filter((l) => l.source !== "cta-funnel")
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
+    if (active === "activities") {
       return [...current].sort(
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
@@ -95,7 +107,7 @@ export default function AdminPage() {
     if (active === "products") setEditing(blankProduct);
     if (active === "posts") setEditing(blankPost);
     if (active === "services") setEditing(blankService);
-    if (active === "leads" || active === "activities") setEditing(null);
+    if (active === "leads" || active === "cta leads" || active === "activities") setEditing(null);
   }, [active]);
 
   async function login(e: FormEvent) {
@@ -129,7 +141,8 @@ export default function AdminPage() {
     if (!editing || (active !== "products" && active !== "posts" && active !== "services")) return;
     const id = editing.id;
     const payload = normalize(active, editing);
-    const res = await fetch(`${API_URL}/admin/${active}${id ? `/${id}` : ""}`, {
+    const collectionToSave = active as Collection;
+    const res = await fetch(`${API_URL}/admin/${collectionToSave}${id ? `/${id}` : ""}`, {
       method: id ? "PATCH" : "POST",
       headers,
       body: JSON.stringify(payload),
@@ -143,7 +156,8 @@ export default function AdminPage() {
   }
 
   async function deleteItem(id: string) {
-    await fetch(`${API_URL}/admin/${active}/${id}`, { method: "DELETE", headers });
+    const collectionToDelete = active as Collection;
+    await fetch(`${API_URL}/admin/${collectionToDelete}/${id}`, { method: "DELETE", headers });
     await refreshAll();
   }
 
@@ -181,16 +195,26 @@ export default function AdminPage() {
           <h1>Admin</h1>
         </div>
         <nav>
-          {collections.map((collection) => (
-            <button
-              key={collection}
-              className={active === collection ? "active" : ""}
-              onClick={() => setActive(collection)}
-            >
-              {collection}
-              <span>{items[collection].length}</span>
-            </button>
-          ))}
+          {navItems.map((navItem) => {
+            let count = 0;
+            if (navItem === "cta leads") {
+              count = items.leads.filter((l) => l.source === "cta-funnel").length;
+            } else if (navItem === "leads") {
+              count = items.leads.filter((l) => l.source !== "cta-funnel").length;
+            } else {
+              count = items[navItem as Collection]?.length || 0;
+            }
+            return (
+              <button
+                key={navItem}
+                className={active === navItem ? "active" : ""}
+                onClick={() => setActive(navItem)}
+              >
+                {navItem}
+                <span>{count}</span>
+              </button>
+            );
+          })}
         </nav>
         <button
           className="ghost"
@@ -224,14 +248,16 @@ export default function AdminPage() {
         )}
 
         <div className="grid-list">
-          {displayedItems.map((item) => (
+          {displayedItems.map((item) => {
+            const payload = item.payload?.payload || item.payload || {};
+            return (
             <article key={item.id} className="row-card">
               <div>
-                {active === "leads" ? (
+                {active === "leads" || active === "cta leads" ? (
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                       <span className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                        item.type === "consultation" 
+                        item.type === "consultation" || item.type === "whatsapp-funnel" || item.type === "newsletter"
                           ? "bg-[#c5ff3d]/15 text-[#c5ff3d] border border-[#c5ff3d]/30" 
                           : "bg-neutral-800 text-neutral-300 border border-neutral-700"
                       }`}>
@@ -248,60 +274,60 @@ export default function AdminPage() {
                       <span className="text-neutral-500 font-mono text-[10px]">Source: {item.source}</span>
                     </div>
                     <h3 className="text-base font-semibold text-foreground">
-                      {item.payload?.name ? `${item.payload.name} (${item.payload.email})` : item.payload?.email || "Anonymous Lead"}
+                      {payload.name ? `${payload.name} (${payload.email})` : payload.email || "Anonymous Lead"}
                     </h3>
                     
                     <div className="mt-2 space-y-2 border-t border-neutral-800/80 pt-3">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1.5 text-xs">
-                        {item.payload?.email && (
+                        {payload.email && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Email:</span>
-                            <a href={`mailto:${item.payload.email}`} className="text-[#c5ff3d] hover:underline font-mono">{String(item.payload.email)}</a>
+                            <a href={`mailto:${payload.email}`} className="text-[#c5ff3d] hover:underline font-mono">{String(payload.email)}</a>
                           </div>
                         )}
-                        {item.payload?.name && (
+                        {payload.name && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Name:</span>
-                            <span className="text-foreground">{String(item.payload.name)}</span>
+                            <span className="text-foreground">{String(payload.name)}</span>
                           </div>
                         )}
-                        {(item.payload?.business || item.payload?.company) && (
+                        {(payload.business || payload.company) && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Business/Company:</span>
-                            <span className="text-foreground">{String(item.payload.business || item.payload.company)}</span>
+                            <span className="text-foreground">{String(payload.business || payload.company)}</span>
                           </div>
                         )}
-                        {item.payload?.role && (
+                        {payload.role && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Role:</span>
-                            <span className="text-foreground">{String(item.payload.role)}</span>
+                            <span className="text-foreground">{String(payload.role)}</span>
                           </div>
                         )}
-                        {item.payload?.revenue && (
+                        {payload.revenue && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Revenue:</span>
-                            <span className="text-[#c5ff3d]/90 font-mono">{String(item.payload.revenue)}</span>
+                            <span className="text-[#c5ff3d]/90 font-mono">{String(payload.revenue)}</span>
                           </div>
                         )}
-                        {item.payload?.timeline && (
+                        {payload.timeline && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Timeline:</span>
-                            <span className="text-foreground">{String(item.payload.timeline)}</span>
+                            <span className="text-foreground">{String(payload.timeline)}</span>
                           </div>
                         )}
-                        {item.payload?.phone && (
+                        {payload.phone && (
                           <div>
                             <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2">Phone:</span>
-                            <a href={`tel:${item.payload.phone}`} className="text-neutral-300 hover:text-[#c5ff3d] font-mono">{String(item.payload.phone)}</a>
+                            <a href={`tel:${payload.phone}`} className="text-neutral-300 hover:text-[#c5ff3d] font-mono">{String(payload.phone)}</a>
                           </div>
                         )}
                       </div>
                       
-                      {item.payload?.challenges && Array.isArray(item.payload.challenges) && item.payload.challenges.length > 0 && (
+                      {payload.challenges && Array.isArray(payload.challenges) && payload.challenges.length > 0 && (
                         <div className="mt-2 text-xs">
                           <span className="text-neutral-500 font-mono text-[10px] uppercase mr-2 block mb-1">Challenges:</span>
                           <div className="flex flex-wrap gap-1.5">
-                            {item.payload.challenges.map((c: string) => (
+                            {payload.challenges.map((c: string) => (
                               <span key={c} className="px-2 py-0.5 bg-[#c5ff3d]/10 border border-[#c5ff3d]/20 text-[#c5ff3d] text-[10px] rounded">
                                 {c}
                               </span>
@@ -310,10 +336,10 @@ export default function AdminPage() {
                         </div>
                       )}
                       
-                      {item.payload?.description && (
+                      {payload.description && (
                         <div className="mt-2 text-xs bg-neutral-950/40 p-2.5 border border-neutral-800 rounded">
                           <span className="text-neutral-500 font-mono text-[10px] uppercase block mb-1">Context / Description:</span>
-                          <p className="text-neutral-300 whitespace-pre-line leading-relaxed !my-0">{String(item.payload.description)}</p>
+                          <p className="text-neutral-300 whitespace-pre-line leading-relaxed !my-0">{String(payload.description)}</p>
                         </div>
                       )}
 
@@ -345,7 +371,7 @@ export default function AdminPage() {
                             </div>
                           );
                         }
-                        const payload = associatedLead.payload || {};
+                        const payloadData = associatedLead.payload?.payload || associatedLead.payload || {};
                         return (
                           <div className="bg-neutral-950/40 p-3 border border-neutral-800 rounded space-y-2">
                             <div className="flex items-center justify-between border-b border-neutral-800 pb-1.5">
@@ -353,47 +379,47 @@ export default function AdminPage() {
                               <span className="font-mono text-[9px] text-neutral-500">Lead ID: {associatedLead.id}</span>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1.5 text-xs">
-                              {payload.email && (
+                              {payloadData.email && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Email:</span>
-                                  <a href={`mailto:${payload.email}`} className="text-[#c5ff3d] hover:underline font-mono">{String(payload.email)}</a>
+                                  <a href={`mailto:${payloadData.email}`} className="text-[#c5ff3d] hover:underline font-mono">{String(payloadData.email)}</a>
                                 </div>
                               )}
-                              {payload.name && (
+                              {payloadData.name && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Name:</span>
-                                  <span className="text-foreground font-medium">{String(payload.name)}</span>
+                                  <span className="text-foreground font-medium">{String(payloadData.name)}</span>
                                 </div>
                               )}
-                              {(payload.business || payload.company) && (
+                              {(payloadData.business || payloadData.company) && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Business:</span>
-                                  <span className="text-foreground">{String(payload.business || payload.company)}</span>
+                                  <span className="text-foreground">{String(payloadData.business || payloadData.company)}</span>
                                 </div>
                               )}
-                              {payload.role && (
+                              {payloadData.role && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Role:</span>
-                                  <span className="text-foreground">{String(payload.role)}</span>
+                                  <span className="text-foreground">{String(payloadData.role)}</span>
                                 </div>
                               )}
-                              {payload.revenue && (
+                              {payloadData.revenue && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Revenue:</span>
-                                  <span className="text-[#c5ff3d]/90 font-mono">{String(payload.revenue)}</span>
+                                  <span className="text-[#c5ff3d]/90 font-mono">{String(payloadData.revenue)}</span>
                                 </div>
                               )}
-                              {payload.timeline && (
+                              {payloadData.timeline && (
                                 <div>
                                   <span className="text-neutral-500 font-mono text-[10px] uppercase mr-1">Timeline:</span>
-                                  <span className="text-foreground">{String(payload.timeline)}</span>
+                                  <span className="text-foreground">{String(payloadData.timeline)}</span>
                                 </div>
                               )}
                             </div>
-                            {payload.description && (
+                            {payloadData.description && (
                               <div className="mt-1 text-xs border-t border-neutral-800/80 pt-1.5">
                                 <span className="text-neutral-500 font-mono text-[10px] uppercase block mb-0.5">Description:</span>
-                                <p className="text-neutral-300 whitespace-pre-line leading-relaxed !my-0">{String(payload.description)}</p>
+                                <p className="text-neutral-300 whitespace-pre-line leading-relaxed !my-0">{String(payloadData.description)}</p>
                               </div>
                             )}
                           </div>
@@ -471,7 +497,7 @@ export default function AdminPage() {
                     <button className="danger" onClick={() => deleteItem(item.id)}>Delete</button>
                   </>
                 )}
-                {active === "leads" && (
+                {(active === "leads" || active === "cta leads") && (
                   <>
                     <button onClick={() => markLead(item, "reviewed")}>Reviewed</button>
                     <button onClick={() => markLead(item, "contacted")}>Contacted</button>
@@ -479,7 +505,7 @@ export default function AdminPage() {
                 )}
               </div>
             </article>
-          ))}
+          )})}
         </div>
       </section>
     </main>
