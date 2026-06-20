@@ -5,7 +5,9 @@ const NOCODB_URL = "https://db.feedingtrends.com/api/v3/data/pvmdy4nc8k9r5se";
 const FORMS_TABLE = "mkwjonegcqtbup9";
 const ACTIVITIES_TABLE = "mbx38zqkl9f2i40";
 
-const TOKEN = "nc_pat_fA5KGqRqKkjm1rdkyCAk2MuAWzdveNPUGPL1Ipcj";
+const TOKEN =
+	process.env.NEXT_PUBLIC_NOCODB_TOKEN ||
+	"nc_pat_fA5KGqRqKkjm1rdkyCAk2MuAWzdveNPUGPL1Ipcj";
 
 const DEFAULT_UTM = {
 	utm_source: "",
@@ -15,8 +17,10 @@ const DEFAULT_UTM = {
 	utm_content: "",
 };
 
+const LEAD_EMAIL_STORAGE_KEY = "lead_email";
+
 /**
- * Sanitize payload before sending to NocoDB
+ * Replace undefined/null values
  */
 function sanitizeRecord(data: Record<string, any>) {
 	return Object.fromEntries(
@@ -68,7 +72,7 @@ async function createRecord(
 }
 
 /**
- * Update record in NocoDB
+ * Update existing record
  */
 async function updateRecord(
 	tableId: string,
@@ -110,13 +114,17 @@ async function updateRecord(
 }
 
 /**
- * Find existing lead by email
+ * Find lead by email using NocoDB filter
  */
 async function findRecordByEmail(email: string) {
+	if (!email) return null;
+
+	const where = `(email,eq,${email})`;
+
 	const res = await fetch(
-		`${NOCODB_URL}/${FORMS_TABLE}/records?pageSize=1&where=(email,eq,${encodeURIComponent(
-			email,
-		)})`,
+		`${NOCODB_URL}/${FORMS_TABLE}/records?pageSize=1&where=${encodeURIComponent(
+			where,
+		)}`,
 		{
 			headers: {
 				"xc-token": TOKEN,
@@ -124,24 +132,24 @@ async function findRecordByEmail(email: string) {
 		},
 	);
 
-	if (!res.ok) {
-		const errorText = await res.text();
+	const responseText = await res.text();
 
+	if (!res.ok) {
 		console.error("Find Record Error:", {
 			email,
-			errorText,
+			errorText: responseText,
 		});
 
-		throw new Error(errorText);
+		throw new Error(responseText);
 	}
 
-	const data = await res.json();
+	const data = JSON.parse(responseText);
 
 	return data?.records?.[0] || null;
 }
 
 /**
- * Newsletter signup
+ * Newsletter Signup
  */
 export async function submitNewsletter(
 	email: string,
@@ -155,12 +163,9 @@ export async function submitNewsletter(
 
 	return createRecord(FORMS_TABLE, {
 		email: email || "",
-
 		type: ["newsletter"],
-
 		source: "cta-funnel",
 		stage: "newsletter",
-
 		joined_whatsapp: false,
 
 		...DEFAULT_UTM,
@@ -169,8 +174,7 @@ export async function submitNewsletter(
 }
 
 /**
- * Lead form submission
- * Updates newsletter record if email already exists
+ * Lead Submission
  */
 export async function submitLead(
 	data: {
@@ -188,6 +192,8 @@ export async function submitLead(
 
 	const existing = await findRecordByEmail(email);
 
+	let result;
+
 	if (existing) {
 		const existingTypes = Array.isArray(existing?.fields?.type)
 			? existing.fields.type
@@ -197,59 +203,81 @@ export async function submitLead(
 			...new Set([...existingTypes, "newsletter", "whatsapp-funnel"]),
 		];
 
-		return updateRecord(FORMS_TABLE, existing.id, {
+		result = await updateRecord(FORMS_TABLE, existing.id, {
 			name: data?.name || "",
+			email,
 			phone: data?.phone || "",
 
+			type: updatedTypes,
 			stage: "profile",
 			joined_whatsapp: false,
 
-			type: updatedTypes,
+			...DEFAULT_UTM,
+			...sanitizeRecord(utm),
+		});
+	} else {
+		result = await createRecord(FORMS_TABLE, {
+			name: data?.name || "",
+			email,
+			phone: data?.phone || "",
+
+			type: ["whatsapp-funnel"],
+			source: "cta-funnel",
+			stage: "profile",
+			joined_whatsapp: false,
 
 			...DEFAULT_UTM,
 			...sanitizeRecord(utm),
 		});
 	}
 
-	return createRecord(FORMS_TABLE, {
-		name: data?.name || "",
-		email,
-		phone: data?.phone || "",
+	if (typeof window !== "undefined") {
+		localStorage.setItem(LEAD_EMAIL_STORAGE_KEY, email);
+	}
 
-		source: "cta-funnel",
-		stage: "profile",
-
-		joined_whatsapp: false,
-
-		type: ["whatsapp-funnel"],
-
-		...DEFAULT_UTM,
-		...sanitizeRecord(utm),
-	});
+	return result;
 }
 
 /**
- * WhatsApp button click tracking
+ * WhatsApp Click Tracking
  */
 export async function trackWhatsAppClick(utm: UTMParams = {}): Promise<void> {
 	try {
-		await createRecord(FORMS_TABLE, {
-			source: "cta-funnel",
-			stage: "whatsapp-clicked",
+		const email =
+			typeof window !== "undefined"
+				? localStorage.getItem(LEAD_EMAIL_STORAGE_KEY) || ""
+				: "";
 
-			joined_whatsapp: true,
+		if (email) {
+			const existing = await findRecordByEmail(email);
 
-			type: ["whatsapp-funnel"],
+			if (existing) {
+				const existingTypes = Array.isArray(existing?.fields?.type)
+					? existing.fields.type
+					: [];
 
-			...DEFAULT_UTM,
-			...sanitizeRecord(utm),
-		});
+				const updatedTypes = [
+					...new Set([...existingTypes, "newsletter", "whatsapp-funnel"]),
+				];
+
+				await updateRecord(FORMS_TABLE, existing.id, {
+					joined_whatsapp: true,
+					stage: "whatsapp-clicked",
+					type: updatedTypes,
+
+					...DEFAULT_UTM,
+					...sanitizeRecord(utm),
+				});
+			}
+		}
 
 		await createRecord(ACTIVITIES_TABLE, {
 			type: "whatsapp_clicked",
 			actor: "visitor",
 			message: "Visitor clicked WhatsApp join button from CTA funnel",
-			metadata: {},
+			metadata: JSON.stringify({
+				email,
+			}),
 		});
 	} catch (error) {
 		console.error("trackWhatsAppClick error:", error);
@@ -257,7 +285,7 @@ export async function trackWhatsAppClick(utm: UTMParams = {}): Promise<void> {
 }
 
 /**
- * Analytics event tracking
+ * Generic Analytics Tracking
  */
 export async function trackEvent(
 	eventName: string,
@@ -268,7 +296,7 @@ export async function trackEvent(
 			type: eventName || "unknown_event",
 			actor: "visitor",
 			message: `CTA funnel event: ${eventName || "unknown_event"}`,
-			metadata: metadata || {},
+			metadata: JSON.stringify(metadata || {}),
 		});
 	} catch (error) {
 		console.error("trackEvent error:", error);
