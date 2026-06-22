@@ -8,7 +8,7 @@ import { getUTMFromStorage } from "@/lib/utm";
 
 const WHATSAPP_LINK =
 	process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
-	"https://chat.whatsapp.com/REPLACE_WITH_LINK";
+	"https://chat.whatsapp.com/EBvGaOvkTW8L2WPgWOVm1s";
 
 const benefits = [
 	{ icon: Users, text: "Exclusive community of motivated learners" },
