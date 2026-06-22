@@ -20,6 +20,7 @@ export function useUTM(): UTMParams {
       saveUTMToStorage(merged);
     }
 
+    // eslint-disable-next-line
     setUTM(merged);
   }, []);
 
