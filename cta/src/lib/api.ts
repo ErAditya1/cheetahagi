@@ -32,7 +32,7 @@ function sanitizeRecord(data: Record<string, any>) {
 }
 
 /**
- * Create record in NocoDB
+ * Create record in NocoDB fghj
  */
 async function createRecord(
 	tableId: string,
@@ -302,3 +302,4 @@ export async function trackEvent(
 		console.error("trackEvent error:", error);
 	}
 }
+
