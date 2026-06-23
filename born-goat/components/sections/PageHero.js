@@ -2,12 +2,12 @@ import Link from 'next/link';
 
 export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede }) {
   return (
-    <header className="pt-[200px] pb-[100px] max-md:pt-32 max-md:pb-16 relative overflow-hidden border-b border-line">
+    <header className="pt-[200px] pb-[100px] max-md:pt-32 max-md:pb-16 relative overflow-hidden border-b border-[var(--border-subtle)]">
       <div
         className="absolute -top-[20%] -right-[15%] w-[70vw] h-[70vw] pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 55%)',
+            'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 55%)',
           opacity: 0.5,
           filter: 'blur(80px)'
         }}
@@ -16,7 +16,7 @@ export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede
         className="absolute -bottom-[30%] -left-[15%] w-[60vw] h-[60vw] pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 60%)',
+            'radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 60%)',
           opacity: 0.3,
           filter: 'blur(100px)'
         }}
@@ -27,30 +27,30 @@ export default function PageHero({ crumbs = [], eyebrow, title, italicWord, lede
             {crumbs.map((c, i) => (
               <span key={i}>
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-sports-cyan transition-colors">
+                  <Link href={c.href} className="hover:text-gold-primary transition-colors text-decoration-none">
                     {c.label}
                   </Link>
                 ) : (
                   <span>{c.label}</span>
                 )}
-                {i < crumbs.length - 1 && <span className="text-sports-pink mx-3">/</span>}
+                {i < crumbs.length - 1 && <span className="text-[var(--gold-primary)] mx-3">/</span>}
               </span>
             ))}
           </div>
         )}
         {eyebrow && (
-          <span className="eyebrow mb-8 inline-flex">{eyebrow}</span>
+          <span className="text-label mb-8 inline-flex">{eyebrow}</span>
         )}
         <h1
-          className="font-display text-[clamp(64px,11vw,180px)] leading-[0.9] tracking-cinematic uppercase max-w-[1200px]"
+          className="font-display text-[clamp(44px,8vw,110px)] leading-[0.9] tracking-cinematic uppercase max-w-[1200px] text-primary"
           dangerouslySetInnerHTML={{
             __html: italicWord
-              ? title.replace(italicWord, `<span class="text-sports-cyan">${italicWord}</span>`)
+              ? title.replace(italicWord, `<span class="text-gold-gradient">${italicWord}</span>`)
               : title
           }}
         />
         {lede && (
-          <p className="mt-9 text-[18px] text-slate-400 max-w-[680px] leading-[1.65]">
+          <p className="mt-9 text-[18px] text-secondary max-w-[680px] leading-[1.65]">
             {lede}
           </p>
         )}

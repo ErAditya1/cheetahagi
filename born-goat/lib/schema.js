@@ -113,8 +113,28 @@ export function caseStudySchema(cs) {
     '@type': 'CreativeWork',
     name: `${cs.client} — Case Study`,
     description: cs.summary,
-    author: { '@type': 'Organization', name: 'Born GOAT' },
+    author: { '@type': 'Organization', name: 'Born Goat' },
     about: cs.client,
     dateCreated: cs.year
+  };
+}
+
+export function athleteSchema(athlete) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: athlete.name,
+    jobTitle: athlete.role,
+    memberOf: {
+      '@type': 'Organization',
+      name: 'Born Goat',
+      url: SITE_URL
+    },
+    nationality: {
+      '@type': 'Country',
+      name: athlete.country
+    },
+    image: `${SITE_URL}${athlete.imageAsset}`,
+    description: athlete.bio
   };
 }

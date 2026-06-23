@@ -1,12 +1,26 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/lib/site';
 
 export default function Nav() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (href) => {
     if (href === '/') return pathname === '/';
@@ -14,53 +28,87 @@ export default function Nav() {
   };
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-[100] py-5 px-10 max-sm:px-[22px] flex items-center justify-between border-b border-line"
-      style={{
-        backdropFilter: 'blur(20px) saturate(1.4)',
-        WebkitBackdropFilter: 'blur(20px) saturate(1.4)',
-        background: 'rgba(2, 6, 23, 0.78)'
-      }}
-    >
-      <Link href="/" className="flex items-center gap-3.5 text-white group">
-        <div className="relative w-9 h-9 flex items-center justify-center rounded-full border border-titanium/50 overflow-hidden bg-slate-900 transition-colors duration-300 group-hover:border-sports-cyan">
-          <Image
-            src="/icon.png"
-            alt="BORN GOAT Logo"
-            fill
-            sizes="36px"
-            className="object-contain p-0.5"
-            priority
-          />
-        </div>
-        <span className="font-display text-[22px] tracking-[0.06em] uppercase">
-          BORN <span className="bg-gradient-to-r from-sports-blue via-sports-cyan to-sports-pink bg-clip-text text-transparent font-black">G</span>OAT
-        </span>
-      </Link>
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <Link href="/" className="navbar__logo flex items-center gap-2.5">
+          <img src="/icon.png" alt="Born Goat Logo" className="w-8 h-8 object-contain" />
+          <span className="font-display text-[22px] tracking-[0.06em] text-primary uppercase">
+            BORN <span className="font-light text-[var(--gold-primary)]">GOAT</span>
+          </span>
+        </Link>
 
-      <div className="flex gap-9 items-center">
-        {NAV_ITEMS.map(item => (
-          <Link
-            key={item.key}
-            href={item.href}
-            className={`max-lg:hidden font-mono text-xs font-medium tracking-wide-cap uppercase transition-colors relative ${isActive(item.href) ? 'text-sports-cyan' : 'text-titanium hover:text-white'
-              }`}
-            style={{ letterSpacing: '0.18em' }}
-          >
-            {item.label}
-            <span
-              className={`absolute left-0 -bottom-1.5 h-px bg-sports-cyan transition-[right] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${isActive(item.href) ? 'right-0' : 'right-full'
-                }`}
-            />
+        {/* Desktop Links */}
+        <ul className="navbar__links max-md:hidden">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.key}>
+              <Link
+                href={item.href}
+                className={`navbar__link ${isActive(item.href) ? 'text-primary' : 'text-muted'}`}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop CTA */}
+        <div className="flex items-center gap-4 max-md:hidden">
+          <Link href="/contact" className="btn-secondary py-[0.5rem] px-5 text-xs">
+            Join BORN GOAT
           </Link>
-        ))}
+        </div>
+
+        {/* Mobile Hamburger Toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="hidden max-md:flex flex-col gap-1.5 justify-center items-center w-8 h-8 bg-transparent border-none cursor-pointer z-[1100]"
+          aria-label="Toggle Menu"
+        >
+          <span
+            className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
+              mobileOpen ? 'transform rotate-45 translate-y-2' : ''
+            }`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-primary transition-all duration-300 ${mobileOpen ? 'opacity-0' : 'opacity-100'}`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
+              mobileOpen ? 'transform -rotate-45 -translate-y-2' : ''
+            }`}
+          />
+        </button>
+      </nav>
+
+      {/* Mobile Menu Drawer */}
+      <div
+        className={`fixed inset-0 z-[999] bg-[#080808]/98 backdrop-blur-lg flex flex-col justify-center items-center gap-8 transition-all duration-500 max-md:flex ${
+          mobileOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <ul className="list-none flex flex-col items-center gap-6">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.key}>
+              <Link
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`font-display text-4xl uppercase tracking-widest text-decoration-none transition-colors ${
+                  isActive(item.href) ? 'text-[var(--gold-primary)]' : 'text-secondary hover:text-primary'
+                }`}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
         <Link
           href="/contact"
-          className="bg-gradient-to-r from-sports-blue to-sports-cyan text-slate-950 px-[26px] py-[13px] font-mono text-[11px] font-bold uppercase tracking-extra-wide transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:shadow-cyan-glow hover:-translate-y-px relative overflow-hidden"
+          onClick={() => setMobileOpen(false)}
+          className="btn-primary mt-6"
         >
-          Book a Call →
+          Apply as Athlete
         </Link>
       </div>
-    </nav>
+    </>
   );
 }

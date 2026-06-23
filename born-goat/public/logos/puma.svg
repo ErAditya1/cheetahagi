@@ -1,0 +1,4 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <text x="50%" y="60%" text-anchor="middle" font-family="'Space Grotesk', 'Oswald', sans-serif" font-weight="900" font-size="28" fill="white" letter-spacing="2">PUMA</text>
+  <path d="M10,20 C15,15 25,15 30,22 C32,25 35,22 38,20 C42,18 45,22 42,26 Z" fill="white" transform="translate(10,-5)"/>
+</svg>

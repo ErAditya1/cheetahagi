@@ -1,12 +1,11 @@
 import PageHero from '@/components/sections/PageHero';
 import Reveal from '@/components/ui/Reveal';
-import Eyebrow from '@/components/ui/Eyebrow';
 import LeadForm from '@/components/forms/LeadForm';
 
 export const metadata = {
   title: 'Book a Consultation',
   description:
-    'Book a 45-minute consultation with a senior partner at Born GOAT. Three new clients per quarter. The first conversation is free, unhurried, and structured to be useful.',
+    'Book a private consultation with a senior partner at Born Goat. The first conversation is free, unhurried, and structured to build your sports legacy.',
   alternates: { canonical: '/consultation' }
 };
 
@@ -15,76 +14,69 @@ export default function ConsultationPage() {
     <>
       <PageHero
         crumbs={[
-          { label: 'BORN GOAT', href: '/' },
+          { label: 'Born Goat', href: '/' },
           { label: 'Consultation' }
         ]}
         eyebrow="THE FIRST CONVERSATION"
-        title="FORTY-FIVE MINUTES. NO PITCH."
-        italicWord="NO PITCH"
-        lede="A 45-minute call with a senior partner. We listen to the brief, ask the questions that matter, and tell you honestly whether this is the right firm for the work."
+        title="PRIVATE INTAKE. CONCRETE ADVICE."
+        italicWord="CONCRETE ADVICE"
+        lede="A 45-minute private intake call with a senior partner. We review your current athletic status, discuss representation fit, and outline potential career milestones."
       />
 
-      <section className="py-[80px] max-md:py-12 bg-obsidian">
+      <section className="py-[80px] max-md:py-12 bg-void animate-fade-in">
         <div className="max-w-[1400px] mx-auto px-10 max-sm:px-[22px]">
           <div className="grid grid-cols-[1fr_1.2fr] max-lg:grid-cols-1 gap-16 max-lg:gap-10 items-start">
             {/* SIDEBAR */}
             <Reveal>
               <div className="sticky top-32 max-lg:static space-y-10">
                 <div>
-                  <Eyebrow className="mb-7">WHAT THE CALL IS</Eyebrow>
-                  <h2 className="font-display text-[clamp(36px,4.5vw,56px)] leading-[0.95] tracking-cinematic uppercase mt-7 mb-7">
-                    A FIRST READ,
+                  <span className="text-label text-xs block mb-4">WHAT THE CALL IS</span>
+                  <h2 className="font-heading text-[clamp(36px,4.5vw,50px)] leading-[0.95] tracking-cinematic uppercase mt-7 mb-7 text-primary">
+                    A DIAGNOSIS,
                     <br />
-                    <span className="text-gold">NOT A PITCH.</span>
+                    <span className="text-gold-gradient">NOT A PITCH.</span>
                   </h2>
-                  <p className="text-[16px] text-titanium leading-[1.75] mb-7">
-                    Most agencies use a first call to sell. We use it to
-                    diagnose. By the end of 45 minutes we will both know
-                    whether the work is a fit — and if it is not, we will
-                    point you to who we would call instead.
+                  <p className="text-[16px] text-secondary leading-[1.75] mb-7">
+                    Most representation firms use a first call to sell. We use it to diagnose. By the end of 45 minutes we will both know whether there is a fit — and if there is not, we will refer you to alternative partners.
                   </p>
                 </div>
 
-                <div className="border-t border-line pt-8 space-y-8">
+                <div className="border-t border-[var(--border-subtle)] pt-8 space-y-8">
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-2">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-[var(--gold-primary)] mb-2 font-bold">
                       WHAT YOU LEAVE WITH
                     </div>
-                    <ul className="space-y-3 text-[14px] text-titanium leading-[1.65]">
+                    <ul className="space-y-3 text-[14px] text-secondary leading-[1.65] pl-0 list-none">
                       <li className="pl-5 relative">
-                        <span className="absolute left-0 top-0 text-gold">◆</span>
-                        A clear read on whether the brief is workable
+                        <span className="absolute left-0 top-0 text-[var(--gold-primary)]">◆</span>
+                        A realistic assessment of your market value
                       </li>
                       <li className="pl-5 relative">
-                        <span className="absolute left-0 top-0 text-gold">◆</span>
-                        A scoped proposal within five working days if there is fit
+                        <span className="absolute left-0 top-0 text-[var(--gold-primary)]">◆</span>
+                        Initial recommendations for brand positioning
                       </li>
                       <li className="pl-5 relative">
-                        <span className="absolute left-0 top-0 text-gold">◆</span>
-                        A reading list and one or two operating notes either way
-                      </li>
-                      <li className="pl-5 relative">
-                        <span className="absolute left-0 top-0 text-gold">◆</span>
-                        If we are not the right firm, a named referral
+                        <span className="absolute left-0 top-0 text-[var(--gold-primary)]">◆</span>
+                        If we are not a fit, a direct referral to a trusted agent
                       </li>
                     </ul>
                   </div>
 
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-2">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-[var(--gold-primary)] mb-2 font-bold">
                       WHO YOU SPEAK TO
                     </div>
-                    <p className="text-[14px] text-titanium leading-[1.65]">
-                      A senior partner, personally. The same person who would lead the engagement if you become a client.
+                    <p className="text-[14px] text-secondary leading-[1.65]">
+                      A senior partner, personally. The same representative who coordinates transfers and endorsement campaigns.
                     </p>
                   </div>
 
                   <div>
-                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-gold mb-2">
+                    <div className="font-mono text-[10px] tracking-extra-wide uppercase text-[var(--gold-primary)] mb-2 font-bold">
                       WHO IT IS FOR
                     </div>
-                    <p className="text-[14px] text-titanium leading-[1.65]">
-                      Athletes mid-career, league founders, sports brand operators, federations, and serious sports startups. Budgets typically ₹3L/month and up.
+                    <p className="text-[14px] text-secondary leading-[1.65]">
+                      Elite athletes, promising youth prospects in professional academies, and national-level sports figures looking to scale their commercial portfolios.
                     </p>
                   </div>
                 </div>

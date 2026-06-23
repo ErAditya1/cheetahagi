@@ -1,37 +1,37 @@
 export const SITE = {
-  name: 'BORN GOAT',
+  name: 'Born Goat',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://borngoat.com',
-  tagline: 'Live Sports Hub & Real-time Analytics',
-  description: 'Next-gen sports coverage, analytics, and live dashboards. Tracking the world’s elite leagues, teams, and athletes in real time.',
+  tagline: 'Elite Athlete Management & Legacy Building',
+  description: 'The digital home of elite athlete representation — where champions are discovered, careers are built, and legacies are written.',
   email: 'hello@borngoat.com',
-  cities: ['Lucknow', 'Mumbai', 'Dubai'],
+  cities: ['Mumbai', 'London', 'Dubai'],
   founder: 'Yash Srivastava',
-  founded: 2026
+  founded: 2018
 };
 
 export const NAV_ITEMS = [
   { key: 'home', label: 'Home', href: '/' },
-  { key: 'services', label: 'Live Center', href: '/services' },
-  { key: 'work', label: 'Leagues', href: '/case-studies' },
-  { key: 'blog', label: 'Insights', href: '/blog' },
-  { key: 'about', label: 'Platform', href: '/about' },
-  { key: 'faq', label: 'FAQ', href: '/faq' }
+  { key: 'about', label: 'About Us', href: '/about' },
+  { key: 'athletes', label: 'Athletes', href: '/athletes' },
+  { key: 'services', label: 'Services', href: '/services' },
+  { key: 'media', label: 'Media', href: '/blog' },
+  { key: 'contact', label: 'Contact', href: '/contact' }
 ];
 
 export const FOOTER_LINKS = {
   practice: [
-    { label: 'Live Scoreboards', href: '/services/narrative-engineering' },
-    { label: 'Analytics Engine', href: '/services/sports-pr-editorial' },
-    { label: 'Player Stats IP', href: '/services/athlete-league-brand' },
-    { label: 'League Commercials', href: '/services/sponsorship-strategy' },
-    { label: 'Real-time War Rooms', href: '/services/crisis-reputation' }
+    { label: 'Career Management', href: '/services' },
+    { label: 'Brand Building', href: '/services' },
+    { label: 'Marketing & Endorsements', href: '/services' },
+    { label: 'Legal & Contracts', href: '/services' },
+    { label: 'Financial Advisory', href: '/services' }
   ],
   house: [
-    { label: 'The Platform', href: '/about' },
-    { label: 'Leagues & Cups', href: '/case-studies' },
-    { label: 'News Insights', href: '/blog' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Featured Athletes', href: '/athletes' },
+    { label: 'News & Media', href: '/blog' },
     { label: 'FAQs', href: '/faq' },
-    { label: 'Support', href: '/contact' }
+    { label: 'Apply as Athlete', href: '/contact' }
   ],
   connect: [
     { label: 'Instagram', href: '#' },
